@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,6 +36,7 @@ public class MovieDataController {
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
+    @CrossOrigin(origins = "localhost:8081")
    @RequestMapping("getMoviesNowPlayingImagePaths/{imageNumber}")
        public String getNowPlayingImagePaths (@PathVariable int imageNumber){
        StringBuffer response = new StringBuffer();
@@ -52,6 +54,8 @@ public class MovieDataController {
        imagePathRequest(jsonArray, pathList);
        return "\""+pathList.get(imageNumber)+"\"";
    }
+
+    @CrossOrigin(origins = "localhost:8081")
    @RequestMapping("getMoviesNowPlayingDetails/{movieNumber}")
     public String getNowPlayingDetails(@PathVariable int movieNumber){
 
@@ -86,6 +90,7 @@ public class MovieDataController {
        return titleList.get(movieNumber)+overviewList.get(movieNumber)+"\n\""+"Number of Votes:"+voteCountList.get(movieNumber)+"\nAverage Rating:"+ratingList.get(movieNumber)+"\"";
    }
 
+    @CrossOrigin(origins = "localhost:8081")
    @RequestMapping("getMoviesNowPlayingFullDetails/{movieNumber}")
    public List<String> getNowPlayingFullDetails(@PathVariable int movieNumber){
 
@@ -146,6 +151,7 @@ public class MovieDataController {
         }
     }
 
+    @CrossOrigin(origins = "localhost:8081")
     @RequestMapping("getUpAndComingImagePaths/{imageNumber}")
     public String getUpAndComingMoviesImagePaths(@PathVariable int imageNumber){
 
@@ -165,6 +171,7 @@ public class MovieDataController {
             return "\""+pathList.get(imageNumber)+"\"";
     }
 
+    @CrossOrigin(origins = "localhost:8081")
     @RequestMapping("getUpAndComingMovieDetails/{movieNumber}")
     public String getUpAndComingDetails(@PathVariable int movieNumber){
 
@@ -249,6 +256,7 @@ public class MovieDataController {
         return response;
     }
 
+    @CrossOrigin(origins = "localhost:8081")
     @RequestMapping("movie/search/{movieTitle}")
     public String getSearchMovie(@PathVariable String movieTitle){
 
